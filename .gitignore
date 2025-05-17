@@ -1,0 +1,52 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+#Mac
+.DS_Store
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# results file
+*.jpeg
+*.pdf
+*.npy
+*.pt
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+.ipynb_checkpoints/
+.vscode/
+
+# Ignore everything inside the datasets directory
+datasets/**
+
+# Allow .txt files inside the datasets directory
+!datasets/*.txt
+
+# Allow the top-level directories in datasets but not their contents
+!datasets/imagenet/
+!datasets/imagenet-a/
+!datasets/imagenet-c/
+!datasets/imagenet-r/
+!datasets/ImageNetV2-matched-frequency/
+!datasets/objectnet-1.0/
+!datasets/sketch/
+
+# Ignore everything inside those directories
+datasets/imagenet/**
+datasets/imagenet-a/**
+datasets/imagenet-c/**
+datasets/imagenet-r/**
+datasets/ImageNetV2-matched-frequency/**
+datasets/objectnet-1.0/**
+datasets/sketch/**

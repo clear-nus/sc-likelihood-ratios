@@ -1,0 +1,113 @@
+n02708093 analog clock
+n02747177 trash can
+n02769748 backpack
+n02783161 ballpoint pen
+n02786058 Band-Aid
+n02791124 barber chair
+n02808304 bath towel
+n02823428 beer bottle
+n02840245 ring binder
+n02877765 bottle cap
+n02883205 bow tie
+n02906734 broom
+n02909870 bucket
+n02948072 candle
+n02951585 can opener
+n02974003 car wheel
+n02992529 mobile phone
+n03041632 cleaver
+n03063599 coffee mug
+n03075370 combination lock
+n03085013 computer keyboard
+n03197337 digital watch
+n03207743 dishcloth
+n03223299 doormat
+n03255030 dumbbell
+n03271574 electric fan
+n03291819 envelope
+n03297495 espresso machine
+n03379051 football helmet
+n03400231 frying pan
+n03450230 gown
+n03481172 hammer
+n03482405 hamper
+n03483316 hair dryer
+n03534580 hoop skirt
+n03584829 clothes iron
+n03594734 jeans
+n03595614 T-shirt
+n03633091 ladle
+n03637318 lampshade
+n03642806 laptop computer
+n03658185 letter opener
+n03666591 lighter
+n03676483 lipstick
+n03680355 slip-on shoe
+n03691459 music speaker
+n03729826 matchstick
+n03733805 measuring cup
+n03761084 microwave oven
+n03775071 mitten
+n03775546 mixing bowl
+n03782006 monitor
+n03792782 mountain bike
+n03793489 computer mouse
+n03804744 metal nail
+n03814906 necklace
+n03874599 padlock
+n03876231 paintbrush
+n03887697 paper towel
+n03891251 park bench
+n03937543 pill bottle
+n03938244 pillow
+n03950228 drink pitcher
+n03958227 plastic bag
+n03961711 plate rack
+n03970156 plunger
+n03976467 Polaroid camera
+n03983396 soda bottle
+n03995372 power drill
+n04004767 printer
+n04039381 racket
+n04074963 remote control
+n04118776 ruler measuring stick
+n04120489 sneaker
+n04127249 safety pin
+n04131690 salt shaker
+n04133789 sandal
+n04141975 weighing scale
+n04153751 screw
+n04204238 shopping basket
+n04208210 shovel
+n04235860 sleeping bag
+n04254120 soap dispenser
+n04254777 sock
+n04263257 soup bowl
+n04265275 space heater
+n04270147 spatula
+n04332243 strainer
+n04350905 suit
+n04356056 sunglasses
+n04370456 sweatshirt
+n04371430 swim trunks / shorts
+n04380533 table lamp
+n04398044 teapot
+n04399382 teddy bear
+n04404412 television
+n04442312 toaster
+n04476259 tray
+n04507155 umbrella
+n04517823 vacuum cleaner
+n04522168 vase
+n04548362 wallet
+n04557648 water bottle
+n04579432 whistle
+n04591713 wine bottle
+n04596742 wok
+n07579787 plate
+n07684084 baguette
+n07747607 orange
+n07749582 lemon
+n07753592 banana
+n07930864 tea cup
+n15075141 toilet paper
