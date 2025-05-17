@@ -36,7 +36,7 @@ See the arguments in code for more options.
 Datasets go into the `datasets` folder. It should be structured as follows:
 
 ```
-/datasets
+datasets
 ├── imagenet
 ├── imagenet-a
 ├── imagenet-r
@@ -98,7 +98,7 @@ objectnet-1.0
     ├── air_freshener
     ├── alarm_clock
     ├── ...
-├── mapping
+└── mapping
 ```
 Refer to the official ObjectNet download repository.
 
