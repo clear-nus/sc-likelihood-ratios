@@ -5,7 +5,7 @@ from tqdm import tqdm
 import numpy as np
 
 from models.helper import create_model
-from scores.get_score_util import get_score_fn
+from scores.helper import get_score_fn
 # from data_utils.selector_scores_data_util import get_cov_shift_datasets, get_im1k_val_loader, get_cov_shift_loader, get_im1k_train_loader
 from data_utils.helper import get_cov_shift_dataset_names, get_im_train_loader, get_im_val_loader, get_cov_shift_loader, get_im_split_names, get_num_cls
 

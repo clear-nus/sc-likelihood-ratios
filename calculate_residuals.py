@@ -35,7 +35,7 @@ def process_args():
                         help='mini-batch size')
     parser.add_argument('--model_type', default='dfn', choices=['dfn', 'eva'], type=str, help='model type')
     parser.add_argument('--task', type=str, default='imagenet1k',
-                        choices=['imagenet1k', 'imagenetv2', 'imagenet-sketch', 'imagenet-c-blur', 'imagenet-c-noise', 'imagenet-c-digital',
+                        choices=['imagenetv2', 'imagenet-sketch', 'imagenet-c-blur', 'imagenet-c-noise', 'imagenet-c-digital',
                                  'imagenet-c-weather', 'objectnet-113', 'imagenet-a', 'imagenet-r'])
     
     args = parser.parse_args()
