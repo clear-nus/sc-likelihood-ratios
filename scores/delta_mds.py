@@ -37,8 +37,8 @@ class DeltaMDS:
         else:
             class_mean_correct, precision_correct, class_mean_wrong, precision_wrong = torch.load(mean_prec_path, map_location='cpu', weights_only=True)
         
-        self.class_mean = class_mean_correct.cuda()
-        self.precision__correct = precision_correct.cuda()
+        self.class_mean_correct = class_mean_correct.cuda()
+        self.precision_correct = precision_correct.cuda()
         self.class_mean_wrong = class_mean_wrong.cuda()
         self.precision_wrong = precision_wrong.cuda()
 
@@ -62,7 +62,7 @@ class DeltaMDS:
                 class_scores_wrong[:, c] = -torch.matmul(torch.matmul(tensor_wrong, self.precision_wrong), tensor_wrong.t()).diag()
             
             # if a class has all points classified correctly or wrongly, there will be nans
-            # setting to -inf means we ignore this class and the max operation will consider all other classes instead
+            # setting to -inf means we ignore this class and the max operation will consider other classes instead
             class_scores_correct = torch.nan_to_num(class_scores_correct, nan=float('-inf'))
             class_scores_wrong = torch.nan_to_num(class_scores_wrong, nan=float('-inf'))
             

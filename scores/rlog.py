@@ -13,7 +13,7 @@ class RLog:
     def get_score(self, net, loader):
         rlog_score_all = []
 
-        tqdm_object = tqdm(loader, total=len(loader), desc='calculating MSP score')
+        tqdm_object = tqdm(loader, total=len(loader), desc='calculating RLog score')
         for batch_idx, (images, labels) in enumerate(tqdm_object):
             images = images.cuda()
             logits = net(images, return_features=False).float()

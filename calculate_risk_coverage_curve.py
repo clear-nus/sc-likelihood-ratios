@@ -62,17 +62,16 @@ def calc_aurc_coverage(coverage_array, sc_risk_array, alpha=1.0):
 def process_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--root-dir', default="/home/users/alvin/MCM/datasets", type=str, help='root dir of datasets')
-    parser.add_argument('--batch_size', default=512, type=int, help='mini-batch size')
     parser.add_argument('--model_type', default='dfn', choices=['dfn', 'eva'], type=str, help='model type')
     parser.add_argument('--score1', default='msp', type=str, 
                         choices=['msp', 'maxlogit', 'energy', 'mds', 'knn', 'rlog', 'delta-mds', 'delta-knn'], help='score options')
-    parser.add_argument('--score2', default='msp', type=str, 
+    parser.add_argument('--score2', default='none', type=str, 
                         choices=['msp', 'maxlogit', 'energy', 'mds', 'knn', 'rlog', 'delta-mds', 'delta-knn', 'none'], help='score options')
     parser.add_argument('--lam', type=float, default=3, help='coefficient of score2')
     parser.add_argument('--task', type=str, choices=['imagenet1k', 'imagenetv2', 'imagenet-sketch', 'imagenet-c-blur', 
                                                      'imagenet-c-noise', 'imagenet-c-digital',
-                                                     'imagenet-c-weather', 'objectnet-113', 'imagenet-a', 'imagenet-r'])
-    parser.add_argument('--k', type=int, default=25, help="kth nearest neigbor distance to take") # only for knn-based scores
+                                                     'imagenet-c-weather', 'objectnet', 'imagenet-a', 'imagenet-r'])
+    # parser.add_argument('--k', type=int, default=25, help="kth nearest neigbor distance to take") # only for knn-based scores
     args = parser.parse_args()
     if args.score2 == 'none':
         args.score2 = None

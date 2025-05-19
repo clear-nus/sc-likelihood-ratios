@@ -1,7 +1,6 @@
 import argparse
 import os
 import torch
-from tqdm import tqdm
 import numpy as np
 
 from models.helper import create_model
@@ -20,7 +19,7 @@ def process_args():
                         choices=['msp', 'maxlogit', 'energy', 'mds', 'knn', 'rlog', 'delta-mds', 'delta-knn'], help='score options')
     parser.add_argument('--task', type=str, choices=['imagenetv2', 'imagenet-sketch', 'imagenet-c-blur', 
                                                      'imagenet-c-noise', 'imagenet-c-digital',
-                                                     'imagenet-c-weather', 'objectnet-113', 'imagenet-a', 'imagenet-r'])
+                                                     'imagenet-c-weather', 'objectnet', 'imagenet-a', 'imagenet-r'])
     parser.add_argument('--k', type=int, default=25, help="kth nearest neigbor distance to take") # only for knn-based scores
     args = parser.parse_args()
     
@@ -32,6 +31,12 @@ def process_args():
     args.n_cls = get_num_cls(args)
     return args
 
+
+def model_check(args):
+    if args.model_type == 'eva':
+        assert args.task in ['imagenetv2', 'imagenet-sketch', 'imagenet-c-blur', 'imagenet-c-noise', 
+                             'imagenet-c-digital', 'imagenet-c-weather'], "EVA model only supports tasks with full 1K class coverage."
+    
 
 def calculate_and_save_selector_scores(args, name, net, score_fn, loader):
     os.makedirs('selector_scores', exist_ok=True)
@@ -47,6 +52,8 @@ def calculate_and_save_selector_scores(args, name, net, score_fn, loader):
 
 def main():
     args = process_args()
+    model_check(args)
+    
     assert torch.cuda.is_available(), "No CUDA device found."
     torch.cuda.set_device(args.gpu)
     os.makedirs('residuals', exist_ok=True)

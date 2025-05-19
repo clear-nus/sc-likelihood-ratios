@@ -36,12 +36,18 @@ def process_args():
     parser.add_argument('--model_type', default='dfn', choices=['dfn', 'eva'], type=str, help='model type')
     parser.add_argument('--task', type=str, default='imagenet1k',
                         choices=['imagenetv2', 'imagenet-sketch', 'imagenet-c-blur', 'imagenet-c-noise', 'imagenet-c-digital',
-                                 'imagenet-c-weather', 'objectnet-113', 'imagenet-a', 'imagenet-r'])
+                                 'imagenet-c-weather', 'objectnet', 'imagenet-a', 'imagenet-r'])
     
     args = parser.parse_args()
     args.compute_logit_scores = False
     return args
 
+
+def model_check(args):
+    if args.model_type == 'eva':
+        assert args.task in ['imagenetv2', 'imagenet-sketch', 'imagenet-c-blur', 'imagenet-c-noise', 
+                             'imagenet-c-digital', 'imagenet-c-weather'], "EVA model only supports tasks with full 1K class coverage."
+        
 
 def calculate_and_save_residuals(args, name, net, loader):
     residuals_path = f"residuals/{args.model_type}_{name}.npy"
@@ -69,6 +75,8 @@ def calculate_and_save_residuals(args, name, net, loader):
 def main():
     
     args = process_args()
+    model_check(args)
+    
     assert torch.cuda.is_available(), "No CUDA device found."
     torch.cuda.set_device(args.gpu)
     os.makedirs('residuals', exist_ok=True)

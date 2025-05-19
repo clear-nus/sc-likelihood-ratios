@@ -34,7 +34,7 @@ class KNN:
             features /= features.norm(dim=-1, keepdim=True)
             features = features.cpu().numpy()
             D, _ = index.search(features, self.k)
-            kth_dist = D[:, -1]
+            kth_dist = -D[:, -1]
             knn_score_all.extend(kth_dist)
 
         return np.asarray(knn_score_all, dtype=np.float32)

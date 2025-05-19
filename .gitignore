@@ -50,3 +50,10 @@ datasets/imagenet-r/**
 datasets/ImageNetV2-matched-frequency/**
 datasets/objectnet-1.0/**
 datasets/sketch/**
+
+delta_mds_stats/
+delta_knn_embeddings
+mds_stats/
+knn_embeddings/
+
+*.zip

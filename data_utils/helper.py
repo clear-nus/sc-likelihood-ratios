@@ -10,7 +10,7 @@ def get_num_cls(args):
     NUM_CLS_DICT = {
         'imagenet-sketch': 1000,
         'imagenetv2': 1000,
-        'objectnet-113': 113,
+        'objectnet': 113,
         'imagenet-a': 200,
         'imagenet-r': 200,
         'imagenet-c-blur': 1000,
@@ -28,8 +28,8 @@ def get_im_split_names(args):
         return 'imagenet1k-a-200-split'
     elif args.task == 'imagenet-r':
         return 'imagenet1k-r-200-split'
-    elif args.task == 'objectnet-113':
-        return 'imagenet1k-objectnet-113-split'
+    elif args.task == 'objectnet':
+        return 'imagenet1k-objectnet-split'
     else:
         return 'imagenet1k'
 
@@ -40,8 +40,8 @@ def get_cov_shift_dataset_names(args):
         datasets = ['imagenet-a']
     elif args.task == 'imagenet-r':
         datasets = ['imagenet-r']
-    elif args.task == 'objectnet-113':
-        datasets = ['objectnet-113']
+    elif args.task == 'objectnet':
+        datasets = ['objectnet']
     elif args.task == 'imagenet-sketch':
         datasets = ['imagenet-sketch']
     elif args.task == 'imagenet-c-blur':
@@ -70,9 +70,9 @@ def get_im_train_loader(args, preprocess, shuffle=False):
         ds = FilteredImageFolder(os.path.join(args.root_dir, "imagenet/train"), 
                                       os.path.join(args.root_dir, 'imagenet-r-classes.txt'),
                                       transform=preprocess)
-    elif args.task == 'objectnet-113':
+    elif args.task == 'objectnet':
         ds = FilteredImageFolder(os.path.join(args.root_dir, "imagenet/train"), 
-                                      os.path.join(args.root_dir, 'objectnet-113-classes.txt'),
+                                      os.path.join(args.root_dir, 'objectnet-classes.txt'),
                                       transform=preprocess)
     else:
         ds = ImageFolder(os.path.join(args.root_dir, "imagenet/train"), transform=preprocess)
@@ -94,14 +94,14 @@ def get_im_val_loader(args, preprocess, shuffle=False):
                                  os.path.join(args.root_dir, 'imagenet-r-classes.txt'),
                                  transform=preprocess)
     
-    elif args.task == 'objectnet-113':
+    elif args.task == 'objectnet':
         ds = FilteredImageFolder(os.path.join(args.root_dir, 'imagenet/val'), 
-                                 os.path.join(args.root_dir, 'objectnet-113-classes.txt'),
+                                 os.path.join(args.root_dir, 'objectnet-classes.txt'),
                                  transform=preprocess)
-        
+
     else:
         ds = ImageFolder(os.path.join(args.root_dir, "imagenet/val"), transform=preprocess)
-        
+
     loader = DataLoader(ds, batch_size=args.batch_size, shuffle=shuffle, **kwargs)
     return loader
 
@@ -118,7 +118,7 @@ def get_cov_shift_loader(args, preprocess, domain, shuffle=False):
                                  os.path.join(args.root_dir, 'imagenet-a-classes.txt'),
                                  transform=preprocess)
 
-    elif args.task == 'objectnet-113':
+    elif args.task == 'objectnet':
         ds = ObjectNet(args.root_dir, train=False, transform=preprocess)
 
     elif args.task == 'imagenetv2':
@@ -128,16 +128,16 @@ def get_cov_shift_loader(args, preprocess, domain, shuffle=False):
         ds = ImageFolder(os.path.join(args.root_dir, "sketch"), transform=preprocess)
         
     elif args.task == 'imagenet-c-blur':
-        ds = ImageFolder(os.path.join(args.root_dir, f"imagenet-c/blur/{domain}/{args.corruption_level}"), transform=preprocess)
+        ds = ImageFolder(os.path.join(args.root_dir, f"imagenet-c/blur/{domain}/5"), transform=preprocess)
         
     elif args.task == 'imagenet-c-digital':
-        ds = ImageFolder(os.path.join(args.root_dir, f"imagenet-c/digital/{domain}/{args.corruption_level}"), transform=preprocess)
+        ds = ImageFolder(os.path.join(args.root_dir, f"imagenet-c/digital/{domain}/5"), transform=preprocess)
         
     elif args.task == 'imagenet-c-noise':
-        ds = ImageFolder(os.path.join(args.root_dir, f"imagenet-c/noise/{domain}/{args.corruption_level}"), transform=preprocess)
+        ds = ImageFolder(os.path.join(args.root_dir, f"imagenet-c/noise/{domain}/5"), transform=preprocess)
         
     elif args.task == 'imagenet-c-weather':
-        ds = ImageFolder(os.path.join(args.root_dir, f"imagenet-c/weather/{domain}/{args.corruption_level}"), transform=preprocess)
+        ds = ImageFolder(os.path.join(args.root_dir, f"imagenet-c/weather/{domain}/5"), transform=preprocess)
 
     loader = DataLoader(ds, batch_size=args.batch_size, shuffle=shuffle, **kwargs)
     return loader

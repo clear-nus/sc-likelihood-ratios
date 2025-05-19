@@ -48,14 +48,14 @@ class DeltaKNN:
             np.savez(knn_path, correct_features=self.knn_features_correct, wrong_features=self.knn_features_wrong)
         else:
             all_features = np.load(knn_path)
-            self.knn_feaures_correct, self.knn_features_wrong = all_features['correct_features'], all_features['wrong_features']
+            self.knn_features_correct, self.knn_features_wrong = all_features['correct_features'], all_features['wrong_features']
 
     @torch.no_grad()
     def get_score(self, net, loader):
-        correct_index = faiss.IndexFlatL2(self.knn_feaures_correct.shape[1])
+        correct_index = faiss.IndexFlatL2(self.knn_features_correct.shape[1])
         wrong_index = faiss.IndexFlatL2(self.knn_features_wrong.shape[1])
         
-        correct_index.add(self.knn_feaures_correct)
+        correct_index.add(self.knn_features_correct)
         wrong_index.add(self.knn_features_wrong)
         
         knn_score_all = []
@@ -63,7 +63,7 @@ class DeltaKNN:
         tqdm_object = tqdm(loader, total=len(loader),  desc='calculating Delta KNN score')
         for batch_idx, (images, labels) in enumerate(tqdm_object):
             images = images.cuda()
-            features = net.encode_image(images).float()
+            logits, features = net(images, return_features=True)
             features /= features.norm(dim=-1, keepdim=True)
             features = features.cpu().numpy()
             

@@ -6,12 +6,12 @@ from pathlib import Path
 
 
 def get_imagenet_labels(args):
-    if args.task == 'imagenet1k-a-200-split' or args.task == 'imagenet-a':
+    if args.task == 'imagenet-a':
         labels = list(load_imagenet_subset_label_mapping(os.path.join(args.root_dir, "imagenet-a-classes.txt")).values())
-    elif args.task == 'imagenet1k-r-200-split' or args.task == 'imagenet-r':
+    elif args.task == 'imagenet-r':
         labels = list(load_imagenet_subset_label_mapping(os.path.join(args.root_dir, "imagenet-r-classes.txt")).values())
-    elif args.task == 'imagenet1k-objectnet-113-split' or args.task == 'objectnet-113':
-        labels = list(load_imagenet_subset_label_mapping(os.path.join(args.root_dir, "objectnet-113-classes.txt")).values())
+    elif args.task == 'objectnet':
+        labels = list(load_imagenet_subset_label_mapping(os.path.join(args.root_dir, "objectnet-classes.txt")).values())
     else:
         labels = get_imagenet1k_classes()
         

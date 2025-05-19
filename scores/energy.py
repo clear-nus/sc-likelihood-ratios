@@ -14,12 +14,11 @@ class Energy:
     def get_score(self, net, loader):
         energy_score_all = []
 
-        tqdm_object = tqdm(loader, total=len(loader), desc='calculating MSP score')
+        tqdm_object = tqdm(loader, total=len(loader), desc='calculating Energy score')
         for batch_idx, (images, labels) in enumerate(tqdm_object):
             images = images.cuda()
             logits = net(images, return_features=False).float()
-            smax = F.softmax(logits, dim=1)
-            energy =  torch.logsumexp(smax, dim=1) # take temperature = 1
+            energy =  torch.logsumexp(logits, dim=1) # take temperature = 1
             energy_score_all.append(energy.cpu().numpy())
-            
+
         return np.concatenate(energy_score_all, axis=0)
