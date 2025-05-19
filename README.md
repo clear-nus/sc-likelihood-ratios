@@ -45,7 +45,7 @@ datasets
 ├── sketch
 ├── imagenet-a-classes.txt
 ├── imagenet-r-classes.txt
-└── objectnet-113-classes.txt
+└── objectnet-classes.txt
 ```
 The `.txt` files and general structure are already included. Inside each folder, the datasets should be prepared in the following formats. Most datasets are already formatted as such when downloaded from their official source.
 ```
@@ -69,13 +69,24 @@ imagenet-a
 ```
 imagenet-c
 ├── blur
-    └── 5
-       ├── n01440764
-       ├── ...
+    ├── defocus_blur
+        └── 5
+            ├── n01440764
+            ├── ...
+    ├── glass_blur
+    ├── ...
 ├── digital
 ├── noise
 └── weather
 ```
+We group them into corruption types: 
+```
+blur - defocus_blur, glass_blur, motion_blur, zoom_blur
+digital - contrast, elastic_transform, jpeg_compression, pixelate
+noise - gaussian_noise, impulse_noise, shot_noise
+weather - brightness, fog, frost, snow
+```
+
 We evaluate on level 5 corruption strength for imagenet-c.
 
 ```

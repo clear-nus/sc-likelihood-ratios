@@ -59,6 +59,18 @@ def calc_aurc_coverage(coverage_array, sc_risk_array, alpha=1.0):
     return AUC
 
 
+def return_aurc_naurc(residuals, scores, alpha=1.0):
+
+    coverage, risk = get_rc_curve_values(residuals, scores)
+    optimal_coverage, optimal_risk = get_rc_curve_values_optimal(residuals)
+    
+    aurc = calc_aurc_coverage(coverage, risk)
+    optimal_aurc = calc_aurc_coverage(optimal_coverage, optimal_risk)
+    naurc = (aurc - optimal_aurc) / (risk[-1] - optimal_aurc)
+    
+    return aurc, naurc
+
+
 def process_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--root-dir', default="/home/users/alvin/MCM/datasets", type=str, help='root dir of datasets')
@@ -95,12 +107,13 @@ def main():
     
     im_val_residuals_path = f"residuals/{args.model_type}_{im_val_name}.npy"
     in_residuals = np.load(im_val_residuals_path)
+    name_dict = {}
     
     # get covariate shift scores and residuals 
     if args.task == 'imagenet1k':
-        # empty np array if only evaluating on imagenet1k
-        out_scores = np.array([])
-        out_residuals = np.array([])
+        aurc, naurc = return_aurc_naurc(in_residuals, in_scores)
+        name_dict['imagenet1k'] = (aurc, naurc)
+    
     else:
         cov_shift_names = get_cov_shift_dataset_names(args)
         for name in cov_shift_names:
@@ -119,25 +132,22 @@ def main():
             # load residuals
             cov_shift_residuals_path = f"residuals/{args.model_type}_{name}.npy"
             out_residuals = np.load(cov_shift_residuals_path)
+    
+            # concatenate scores and residuals and compute risk coverage curve
+            all_scores = np.concatenate((in_scores, out_scores), axis=0)
+            all_residuals = np.concatenate((in_residuals, out_residuals), axis=0)
+            aurc, naurc = return_aurc_naurc(all_residuals, all_scores)
+            
+            name_dict[name] = (aurc, naurc)
         
-    # concatenate scores and residuals and compute risk coverage curve
-    all_scores = np.concatenate((in_scores, out_scores), axis=0)
-    all_residuals = np.concatenate((in_residuals, out_residuals), axis=0)
-    coverage, risk = get_rc_curve_values(all_residuals, all_scores)
-    optimal_coverage, optimal_risk = get_rc_curve_values_optimal(all_residuals)
-    
-    aurc = calc_aurc_coverage(coverage, risk)
-    optimal_aurc = calc_aurc_coverage(optimal_coverage, optimal_risk)
-    naurc = (aurc - optimal_aurc) / (risk[-1] - optimal_aurc)
-    
-    # print aurc and naurc nicely stating model type, score1, score2, lambda
-    print("---------------------------------------------------------")
-    if args.score2 is not None:
-        print(f"Model: {args.model_type}, s1(x): {args.score1}, s2(x): {args.score2}, Lambda: {args.lam}")
-    else:
-        print(f"Model: {args.model_type}, s(x): {args.score1}")
-    print(f"AURC: {round(aurc * 100, 2):.3f}, NAURC: {naurc:.3f}")
-    print("---------------------------------------------------------")
+        # print aurc and naurc nicely stating model type, score1, score2, lambda
+    for name, (aurc, naurc) in name_dict.items():
+        print("---------------------------------------------------------")
+        if args.score2 is not None:
+            print(f"Model: {args.model_type}, Dataset: {name}, s1(x): {args.score1}, s2(x): {args.score2}, Lambda: {args.lam}")
+        else:
+            print(f"Model: {args.model_type}, Dataset: {name}, s(x): {args.score1}")
+        print(f"AURC: {round(aurc * 100, 2):.3f}, NAURC: {naurc:.3f}")
     
 
 if __name__ == "__main__":
