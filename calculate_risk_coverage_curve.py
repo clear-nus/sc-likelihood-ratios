@@ -73,7 +73,7 @@ def return_aurc_naurc(residuals, scores, alpha=1.0):
 
 def process_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--root-dir', default="/home/users/alvin/MCM/datasets", type=str, help='root dir of datasets')
+    # parser.add_argument('--root-dir', default="/home/users/alvin/MCM/datasets", type=str, help='root dir of datasets')
     parser.add_argument('--model_type', default='dfn', choices=['dfn', 'eva'], type=str, help='model type')
     parser.add_argument('--score1', default='msp', type=str, 
                         choices=['msp', 'maxlogit', 'energy', 'mds', 'knn', 'rlog', 'delta-mds', 'delta-knn'], help='score options')
