@@ -1,4 +1,5 @@
-# Repository for "Know When to Abstain: Optimal Selective Classification with Likelihood Ratios"
+# Official Code for "Know When to Abstain: Optimal Selective Classification with Likelihood Ratios"
+This repository is still being updated.
 
 ## How to run
 Install requirements.
