@@ -1,6 +1,17 @@
 # Official Code for "Know When to Abstain: Optimal Selective Classification with Likelihood Ratios"
 This repository is still being updated.
 
+<div align="center">
+
+# Know When to Abstain: Optimal Selective Classification with Likelihood Ratios
+
+[![preprint](https://img.shields.io/static/v1?label=arXiv&message=2505.15008color=B31B1B)](https://arxiv.org/abs/2505.15008)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Venue:ICLR 2026](https://img.shields.io/badge/Venue-ICLR%202026-007CFF)](https://iclr.cc/)
+
+</div>
+
+
 ## How to run
 Install requirements.
 ```
