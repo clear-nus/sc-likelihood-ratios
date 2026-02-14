@@ -8,6 +8,14 @@
 
 </div>
 
+<p align="center">
+  <img src="./assets/main_diagram.png" width="60%">
+  <br />
+  <span>Illustration of our proposed Neyman–Pearson optimal distance-based selective classification
+methods.</span>
+</p>
+
+This is the official code repository for the ICLR 2026 paper [Know When to Abstain: Optimal Selective Classification with Likelihood Ratios](https://arxiv.org/abs/2505.15008).
 
 ## How to run
 Install requirements.
